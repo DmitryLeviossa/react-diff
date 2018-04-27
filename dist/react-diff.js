@@ -17,10 +17,7 @@ module.exports = React.createClass({
     return {
       inputA: '',
       inputB: '',
-      type: 'chars',
-      addedLineClassName: 'new-line',
-      removedLineClassName: 'removed-line',
-      stableLineClassName: 'stable-line',
+      type: 'chars'
     };
   },
 
@@ -32,15 +29,10 @@ module.exports = React.createClass({
 
   render: function render() {
     var diff = fnMap[this.props.type](this.props.inputA, this.props.inputB);
-    var result = diff.map(function(part, index) {
-      var className = part.added ? this.props.addedLineClassName : part.removed ? this.props.removedLineClassName : this.props.stableLineClassName;
-      return <span key={index} className={className}>{part.value}</span>
+    var result = diff.map(function (part, index) {
+      var className = part.added ? 'lightgreen' : part.removed ? 'salmon' : 'lightgrey';
+      return React.createElement('span', { key: index, className: className }, part.value);
     });
-    return (
-      <pre className='diff-result'>
-      {result}
-      </pre>
-    );
+    return React.createElement('pre', { className: 'diff-result' }, result);
   }
 });
-
