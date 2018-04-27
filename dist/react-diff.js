@@ -30,12 +30,10 @@ module.exports = React.createClass({
   render: function render() {
     var diff = fnMap[this.props.type](this.props.inputA, this.props.inputB);
     var result = diff.map(function (part, index) {
-      var spanStyle = {
-        backgroundColor: part.added ? 'lightgreen' : part.removed ? 'salmon' : 'lightgrey'
-      };
+      var className = part.added ? 'lightgreen' : part.removed ? 'salmon' : 'lightgrey';
       return React.createElement(
         'span',
-        { key: index, style: spanStyle },
+        { key: index, className: className },
         part.value
       );
     });
